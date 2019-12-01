@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>抽奖</title>
+	<script type="text/javascript" src="./lib/vue.js"></script>
+	<script type="text/javascript" src="./lib/vue-resource.js"></script>
+</head>
+<body>
+	<div id="app">
+		<input type="button" @click="start" value="开始抽奖">
+		<input type="button" @click="stop" value=停止>
+		<h1 v-text = this.lukcy></h1>
+	</div>
+	
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				lukcy: '',
+				id: '',
+				intervalId: null,
+				person: [
+        					"魏曼天",
+							"张甜甜",
+							"魏曼波",
+							"张涛"  ,
+							"张辉"  ,
+							"黎明"  ,
+							"张学友",
+							"刘德华",
+							"张曼玉",
+							"周润发",
+							"古龙",
+							"张健",
+							"姚明",
+							"张靓颖",
+	                    ],
+			},
+			methods: {
+				start() {
+
+					var count = this.person.length;
+					console.log(count);
+
+					if (this.intervalId != null ) {
+                    	return;
+                    } else {
+                    	this.intervalId = setInterval(() => {
+                    	    this.id = parseInt(Math.random()*count, 10);
+                    	    this.lukcy = `${this.person[this.id]}`;
+
+                    	    //console.log(this.id);
+					    }, 10);
+
+					}
+				},
+				stop() {
+					clearInterval(this.intervalId);
+					this.intervalId = null;
+					this.person.splice(this.id, 1);
+					console.log(this.person.length);
+					console.log(this.person);
+				}
+			}
+		})
+	</script>
+</body>
+</html>
