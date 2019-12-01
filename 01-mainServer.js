@@ -1,4 +1,5 @@
- const http = require('http');
+//加载 http 模块 
+const http = require('http');
 
  const fs = require('fs');
 
